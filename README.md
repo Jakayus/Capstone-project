@@ -1,4 +1,4 @@
-# Capstone Project for 
+# Capstone Project
 This Capstone project is a part of Cousera's Meta iOS Developer Professional Certificate curriculum.
 
 The Capstone project is a restaurant app for the fictional company "Little Lemon". The Project is divided into different parts, described below. 
