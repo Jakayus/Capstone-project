@@ -35,16 +35,20 @@ struct Onboarding: View {
                 TextField("Email", text: $email)
                 Button( action: {
                     
-                    // store values in UserDefaults
-                    if firstNameKey.isEmpty {
+                    
+                    if ( !firstName.isEmpty &&
+                         !lastName.isEmpty &&
+                         !email.isEmpty) {
                         UserDefaults.standard.set(firstName, forKey: firstNameKey)
-                    } else if lastNameKey.isEmpty {
                         UserDefaults.standard.set(lastName, forKey: lastNameKey)
-                    } else if emailKey.isEmpty {
                         // TODO: add email validation
                         UserDefaults.standard.set(email, forKey: emailKey)
+                        
+                        isLoggedIn = true
+                    } else {
+                        // TODO: add alert
                     }
-                    isLoggedIn = true
+                    
                     
                 }, label: {
                     Text("Register")
