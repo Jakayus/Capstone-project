@@ -25,7 +25,7 @@ struct Onboarding: View {
     var body: some View {
         NavigationView {
             VStack{
-                // Note - assignment requests iOS15 style coding
+                // Note - assignment requests iOS15 style coding, latest OS is iOS17
                 NavigationLink(destination: Home(),
                                isActive: $isLoggedIn) {
                     EmptyView()
