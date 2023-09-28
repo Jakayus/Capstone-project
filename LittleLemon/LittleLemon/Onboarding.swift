@@ -12,6 +12,7 @@ import SwiftUI
 let firstNameKey = "First_Name_Key"
 let lastNameKey = "Last_Name_Key"
 let emailKey = "Email_Key"
+let loggedInKey = "Logged_In_Key"
 
 
 struct Onboarding: View {
@@ -43,8 +44,14 @@ struct Onboarding: View {
                         UserDefaults.standard.set(lastName, forKey: lastNameKey)
                         // TODO: add email validation
                         UserDefaults.standard.set(email, forKey: emailKey)
+                        UserDefaults.standard.set(isLoggedIn, forKey: loggedInKey)
                         
                         isLoggedIn = true
+                        
+                        // clear entry fields
+                        firstName = ""
+                        lastName = ""
+                        email = ""
                     } else {
                         // TODO: add alert
                     }
@@ -53,6 +60,11 @@ struct Onboarding: View {
                 }, label: {
                     Text("Register")
                 })
+            }
+            .onAppear {
+                if ( UserDefaults.standard.bool(forKey: loggedInKey) ) {
+                    isLoggedIn = true
+                }
             }
         }
     }

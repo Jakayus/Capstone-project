@@ -13,6 +13,8 @@ struct UserProfile: View {
     private let lastName = UserDefaults.standard.string(forKey: lastNameKey ) ?? "User Second Name"
     private let email = UserDefaults.standard.string(forKey: emailKey ) ?? "User Email"
     
+    @Environment(\.presentationMode) var presentation // reference presentation environment
+    
     var body: some View {
         VStack{
             Text("Personal Information")
@@ -22,10 +24,20 @@ struct UserProfile: View {
             Text(firstName)
             Text(lastName)
             Text(email)
+            Button {
+                UserDefaults.standard.set(false, forKey: loggedInKey)
+                self.presentation.wrappedValue.dismiss() // tell Navigation to go to a previous screen
+                
+            } label: {
+                Text("Logout")
+            }
+            Spacer()
         }
     }
 }
 
-#Preview {
-    UserProfile()
+struct UserProfile_Preview: PreviewProvider {
+    static var previews: some View {
+        UserProfile()
+    }
 }
