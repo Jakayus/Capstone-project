@@ -26,10 +26,10 @@ struct Onboarding: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color("LLGreen")
+                Color("Primary1")
                     .ignoresSafeArea()
                VStack{
-                    Text("Welcome! ")
+                    Text("Welcome to the Little Lemon App! ")
                        .foregroundColor(.yellow)
                         .font(.title)
                         .padding([.top, .horizontal])
@@ -37,7 +37,7 @@ struct Onboarding: View {
                    
                     Text("Create an account to continue")
                        .bold()
-                       .foregroundColor(.yellow)
+                       .foregroundColor(Color("Primary2"))
                         .padding()
                    
                     // Note - assignment requests iOS15 style coding, latest OS is iOS17
@@ -48,9 +48,10 @@ struct Onboarding: View {
                    
                    TextField("",
                              text: $firstName,
-                             prompt: Text("First Name").foregroundColor(.gray)
+                             prompt: Text("First Name")
+                    .foregroundColor(.gray)
                    )
-                   .foregroundColor(.yellow)
+                   .foregroundColor(Color("Primary2"))
                     .padding()
                     .overlay { RoundedRectangle(cornerRadius: 5)
                             .stroke(.yellow, lineWidth: 1)
@@ -62,17 +63,17 @@ struct Onboarding: View {
                               prompt: Text("Last Name")
                         .foregroundColor(.gray)
                     )
-                    .foregroundColor(.yellow)
+                    .foregroundColor(Color("Primary2"))
                         .padding()
                         .overlay { RoundedRectangle(cornerRadius: 5)
                                 .stroke(.yellow, lineWidth: 1)
-                        }
+                        }.foregroundColor(.red)
                         .padding(.horizontal)
                     TextField("",
                               text: $email,
                               prompt: Text("Email").foregroundColor(.gray)
                     )
-                    .foregroundColor(.yellow)
+                    .foregroundColor(Color("Primary2"))
                         .padding()
                         .overlay { RoundedRectangle(cornerRadius: 5)
                                 .stroke(.yellow, lineWidth: 1)
@@ -102,8 +103,13 @@ struct Onboarding: View {
                     } label: {
                         Text("Register")
                             .frame(maxWidth: 150)
+                            
+                            
                     }
                     .buttonStyle(.bordered)
+                    .background(Color("Primary2"))
+                    .foregroundColor(Color.black)
+                    .cornerRadius(5)
                     .padding(.vertical)
                     
                     
