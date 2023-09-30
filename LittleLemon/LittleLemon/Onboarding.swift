@@ -25,48 +25,99 @@ struct Onboarding: View {
     
     var body: some View {
         NavigationView {
-            VStack{
-                // Note - assignment requests iOS15 style coding, latest OS is iOS17
-                NavigationLink(destination: Home(),
-                               isActive: $isLoggedIn) {
-                    EmptyView()
-                }
-                TextField("First Name", text: $firstName)
-                TextField("Last Name", text: $lastName)
-                TextField("Email", text: $email)
-                Button( action: {
-                    
-                    
-                    if ( !firstName.isEmpty &&
-                         !lastName.isEmpty &&
-                         !email.isEmpty) {
-                        UserDefaults.standard.set(firstName, forKey: firstNameKey)
-                        UserDefaults.standard.set(lastName, forKey: lastNameKey)
-                        // TODO: add email validation
-                        UserDefaults.standard.set(email, forKey: emailKey)
-                        UserDefaults.standard.set(isLoggedIn, forKey: loggedInKey)
-                        
-                        isLoggedIn = true
-                        
-                        // clear entry fields
-                        firstName = ""
-                        lastName = ""
-                        email = ""
-                    } else {
-                        // TODO: add alert
+            ZStack {
+                Color("LLGreen")
+                    .ignoresSafeArea()
+               VStack{
+                    Text("Welcome! ")
+                       .foregroundColor(.yellow)
+                        .font(.title)
+                        .padding([.top, .horizontal])
+                        .bold()
+                   
+                    Text("Create an account to continue")
+                       .bold()
+                       .foregroundColor(.yellow)
+                        .padding()
+                   
+                    // Note - assignment requests iOS15 style coding, latest OS is iOS17
+                    NavigationLink(destination: Home(),
+                                   isActive: $isLoggedIn) {
+                        EmptyView()
                     }
+                   
+                   TextField("",
+                             text: $firstName,
+                             prompt: Text("First Name").foregroundColor(.gray)
+                   )
+                   .foregroundColor(.yellow)
+                    .padding()
+                    .overlay { RoundedRectangle(cornerRadius: 5)
+                            .stroke(.yellow, lineWidth: 1)
+                    }
+                    .padding(.horizontal)
+
+                    TextField("",
+                              text: $lastName,
+                              prompt: Text("Last Name")
+                        .foregroundColor(.gray)
+                    )
+                    .foregroundColor(.yellow)
+                        .padding()
+                        .overlay { RoundedRectangle(cornerRadius: 5)
+                                .stroke(.yellow, lineWidth: 1)
+                        }
+                        .padding(.horizontal)
+                    TextField("",
+                              text: $email,
+                              prompt: Text("Email").foregroundColor(.gray)
+                    )
+                    .foregroundColor(.yellow)
+                        .padding()
+                        .overlay { RoundedRectangle(cornerRadius: 5)
+                                .stroke(.yellow, lineWidth: 1)
+                        }
+                        .padding(.horizontal)
+    
+                    Button {
+                        if ( !firstName.isEmpty &&
+                             !lastName.isEmpty &&
+                             !email.isEmpty) {
+                            UserDefaults.standard.set(firstName, forKey: firstNameKey)
+                            UserDefaults.standard.set(lastName, forKey: lastNameKey)
+                            // TODO: add email validation
+                            UserDefaults.standard.set(email, forKey: emailKey)
+                            UserDefaults.standard.set(isLoggedIn, forKey: loggedInKey)
+                            
+                            isLoggedIn = true
+                            
+                            // clear entry fields
+                            firstName = ""
+                            lastName = ""
+                            email = ""
+                        } else {
+                            // TODO: add alert
+                        }
+                        
+                    } label: {
+                        Text("Register")
+                            .frame(maxWidth: 150)
+                    }
+                    .buttonStyle(.bordered)
+                    .padding(.vertical)
                     
                     
-                }, label: {
-                    Text("Register")
-                })
+                } // end VStack
+                .onAppear {
+                    if ( UserDefaults.standard.bool(forKey: loggedInKey) ) {
+                        isLoggedIn = true
+                    }
             }
-            .onAppear {
-                if ( UserDefaults.standard.bool(forKey: loggedInKey) ) {
-                    isLoggedIn = true
-                }
             }
-        }
+            
+        } // end Navigation View
+        
+       
     }
 }
 
