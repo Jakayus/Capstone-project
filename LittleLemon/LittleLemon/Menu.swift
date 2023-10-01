@@ -83,9 +83,7 @@ struct Menu: View {
                     Button("Desserts") { }.buttonStyle(.bordered)
                     Button("Sides") { }.buttonStyle(.bordered)
                 }
-                
-                
-                
+
                 FetchedObjects(predicate: buildPredicate()
                                ,sortDescriptors: buildSortDescriptors()) { (dishes: [Dish]) in
                     List{

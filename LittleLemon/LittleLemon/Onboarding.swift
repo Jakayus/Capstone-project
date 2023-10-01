@@ -88,7 +88,7 @@ struct Onboarding: View {
                             UserDefaults.standard.set(lastName, forKey: lastNameKey)
                             // TODO: add email validation
                             UserDefaults.standard.set(email, forKey: emailKey)
-                            UserDefaults.standard.set(isLoggedIn, forKey: loggedInKey)
+                            UserDefaults.standard.set(true, forKey: loggedInKey)
                             
                             isLoggedIn = true
                             
