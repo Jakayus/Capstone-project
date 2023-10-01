@@ -16,6 +16,8 @@ struct Menu: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State private var searchText = ""
+    
     var body: some View {
         VStack{
             Image("Logo")
@@ -67,7 +69,11 @@ struct Menu: View {
                     Button("Sides") { }.buttonStyle(.bordered)
                 }
                 
-                FetchedObjects(sortDescriptors: buildSortDescriptors()) { (dishes: [Dish]) in
+                // Search Bar
+                TextField("Search menu", text: $searchText)
+                
+                FetchedObjects(predicate: buildPredicate()
+                               ,sortDescriptors: buildSortDescriptors()) { (dishes: [Dish]) in
                     List{
                         ForEach(dishes, id: \.self) { dish in
                             HStack{
@@ -142,11 +148,21 @@ struct Menu: View {
     
     func buildSortDescriptors() -> [NSSortDescriptor] {
 
+        // alphabetical sort descriptor
         return [
             NSSortDescriptor(key: "title",
                             ascending: true,
                              selector: #selector(NSString.localizedCaseInsensitiveCompare))
         ]
+    }
+    
+    func buildPredicate() -> NSPredicate {
+        if searchText.isEmpty {
+            return NSPredicate(value: true)
+        } else {
+            // filter on TextField entry
+            return NSPredicate(format: "title CONTAINS[cd] %@",  "\(searchText)")
+        }
     }
     
     
