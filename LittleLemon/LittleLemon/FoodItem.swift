@@ -10,23 +10,34 @@ import SwiftUI
 struct FoodItem: View {
     
     @State var foodName: String
+    @State var foodPrice: String
+    @State var foodDescription: String
+    
+    
+    
     var body: some View {
         HStack {
-            VStack {
+            VStack (alignment: .leading) {
                 Text("\(foodName)")
-                Text("Menu Item Description")
-                Text("Price")
+                    .bold()
+                    .font(.title3)
+                Text("\(foodDescription)")
+                    .foregroundColor(Color.gray)
+                Text("$\(foodPrice)")
+                    .bold()
             }
+            .padding()
             Image(systemName: "photo")
                 .resizable()
                 .scaledToFit()
-                .padding(50)
+                .frame(maxWidth: 100, maxHeight: 100)
+
         }
     }
 }
 
 struct FoodItem_Previews: PreviewProvider {
     static var previews: some View {
-        FoodItem(foodName: "Test me")
+        FoodItem(foodName: "Food Name", foodPrice: "Free.99", foodDescription: "Great food")
     }
 }

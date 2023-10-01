@@ -89,15 +89,23 @@ struct Menu: View {
                     List{
                         ForEach(dishes, id: \.self) { dish in
                             HStack{
-                                Text("title: \(dish.title ?? "unknown title")")
-                                Text("price: \(dish.price ?? "unknown price")")
-                                
+                                VStack (alignment: .leading) {
+                                    Text("\(dish.title ?? "Unknown Dish")")
+                                        .bold()
+                                        .font(.title3)
+                                    Text("Temp Description")
+                                        .foregroundColor(Color.gray)
+                                         Text("$\(dish.price ?? "Unknown Price")")
+                                        .bold()
+                                }
+                          
                                 // using Apple example of error handling for AsyncImage
                                 AsyncImage(url: URL(string: dish.image ?? "no image")) { phase in
                                     if let image = phase.image {
                                         image
                                             .resizable()
                                             .scaledToFit()
+                                           
                                     } else if phase.error != nil {
                                         Color.red
                                     } else {
@@ -146,7 +154,7 @@ struct Menu: View {
                     newDish.title = foodItem.title
                     newDish.price = foodItem.price
                     newDish.image = foodItem.image
-                    print(newDish.title)
+                    // debut - print(newDish.title)
                 }
                 
                 try? viewContext.save() // save to CoreData
