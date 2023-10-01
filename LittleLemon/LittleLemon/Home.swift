@@ -11,12 +11,16 @@ struct Home: View {
     
     @State private var tabSelection = 1
     
+    let persistence = PersistenceController.shared
+    
+        
     var body: some View {
         // Default TabView Template for now
         TabView(selection: $tabSelection) {
             Menu()
                 .tabItem { Label("Menu", systemImage: "list.dash") }
                 .tag(1)
+                .environment(\.managedObjectContext, persistence.container.viewContext)
             UserProfile()
                 .tabItem { Label("Profile", systemImage: "square.and.pencil") }
                 .tag(2)
