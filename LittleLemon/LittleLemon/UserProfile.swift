@@ -9,28 +9,69 @@ import SwiftUI
 
 struct UserProfile: View {
     
-    private let firstName = UserDefaults.standard.string(forKey: firstNameKey ) ?? "User First Name"
-    private let lastName = UserDefaults.standard.string(forKey: lastNameKey ) ?? "User Second Name"
-    private let email = UserDefaults.standard.string(forKey: emailKey ) ?? "User Email"
+    private let firstName = UserDefaults.standard.string(forKey: firstNameKey ) ?? "First Name"
+    private let lastName = UserDefaults.standard.string(forKey: lastNameKey ) ?? "Second Name"
+    private let email = UserDefaults.standard.string(forKey: emailKey ) ?? "Email"
     
     @Environment(\.presentationMode) var presentation // reference presentation environment
     
     var body: some View {
         VStack{
             Text("Personal Information")
-            Image("profile-image-placeholder")
+                .font(.largeTitle)
+                .bold()
+            Image("Profile")
                 .resizable()
                 .scaledToFit()
-            Text(firstName)
-            Text(lastName)
-            Text(email)
+            HStack{
+                Text("FIRST NAME:")
+                Spacer()
+                Text(firstName)
+                    .font(.title)
+                    .bold()
+            }.padding(.horizontal, 20)
+                .overlay(RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color("Primary1"), lineWidth: 3)
+                )
+                .padding()
+            
+            HStack{
+                Text("LAST NAME:")
+                Spacer()
+                Text(lastName)
+                    .font(.title)
+                    .bold()
+            }.padding(.horizontal, 20)
+                .overlay(RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color("Primary1"), lineWidth: 3)
+                )
+                .padding()
+            
+            HStack{
+                Text("EMAIL:")
+                Spacer()
+                Text(email)
+                    .font(.title)
+                    .bold()
+            }.padding(.horizontal, 20)
+                .overlay(RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color("Primary1"), lineWidth: 3)
+                )
+                .padding()
+            
             Button {
                 UserDefaults.standard.set(false, forKey: loggedInKey)
                 self.presentation.wrappedValue.dismiss() // tell Navigation to go to a previous screen
                 
             } label: {
                 Text("Logout")
+                    .frame(maxWidth: 150)
             }
+            .buttonStyle(.bordered)
+            .background(Color("Primary1"))
+            .foregroundColor(Color.white)
+            .cornerRadius(5)
+            .padding(.vertical)
             Spacer()
         }
     }
