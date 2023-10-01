@@ -85,6 +85,10 @@ struct Menu: View {
     
     func getMenuData() {
         
+        // clear database (per Coursera course instruction)
+        PersistenceController.shared.clear()
+        
+        
         // get URL
         let url = URL(string: "https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu.json")!
         
@@ -107,6 +111,17 @@ struct Menu: View {
                 //print(recipes)
                 //var tempMenuList:MenuList = recipes
                 //print(tempMenuList.menu[0].title)
+                
+                for foodItem in menuList.menu {
+                    let newDish = Dish(context: viewContext) // Note - initially had an error saying "Dish could not be found" - quitting and restarting Xcode seemed to solve this as this class is created dynamically
+                    
+                    newDish.title = foodItem.title
+                    newDish.price = foodItem.price
+                    newDish.image = foodItem.image
+                    
+                    try? viewContext.save() // save to CoreData
+                    
+                }
                 
             } else {
                 print("unsuccessful decoding - data not valid")
