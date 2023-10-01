@@ -93,7 +93,7 @@ struct Menu: View {
                                     Text("\(dish.title ?? "Unknown Dish")")
                                         .bold()
                                         .font(.title3)
-                                    Text("Temp Description")
+                                    Text("\(dish.foodDescription ?? "Description Unknown")")
                                         .foregroundColor(Color.gray)
                                          Text("$\(dish.price ?? "Unknown Price")")
                                         .bold()
@@ -154,6 +154,9 @@ struct Menu: View {
                     newDish.title = foodItem.title
                     newDish.price = foodItem.price
                     newDish.image = foodItem.image
+                    newDish.category = foodItem.category
+                    newDish.foodDescription = foodItem.description
+                    
                     // debut - print(newDish.title)
                 }
                 

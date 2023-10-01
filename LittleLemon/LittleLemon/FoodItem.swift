@@ -13,8 +13,6 @@ struct FoodItem: View {
     @State var foodPrice: String
     @State var foodDescription: String
     
-    
-    
     var body: some View {
         HStack {
             VStack (alignment: .leading) {
