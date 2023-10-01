@@ -20,9 +20,16 @@ struct Menu: View {
     
     var body: some View {
         VStack{
-            Image("Logo")
-                .resizable()
-                .fixedSize()
+            HStack {
+                Spacer()
+                Image("Logo")
+                    .resizable()
+                    .fixedSize()
+                Image("Profile")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .padding([.trailing])
+            }
             
             VStack (alignment: .leading) {
                 VStack (alignment: .leading) {
@@ -48,6 +55,14 @@ struct Menu: View {
                         .cornerRadius(10)
                         .padding([.bottom, .trailing])
                 }
+                // Search Bar
+                TextField("🔍 Search menu", text: $searchText)
+                    .padding(5)
+                    .foregroundColor(.black)
+                    .overlay { RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color.yellow)}
+                    .background(Color.white)
+                    .padding()
             }
             .background(Color("Primary1"))
             .ignoresSafeArea()
@@ -69,8 +84,7 @@ struct Menu: View {
                     Button("Sides") { }.buttonStyle(.bordered)
                 }
                 
-                // Search Bar
-                TextField("Search menu", text: $searchText)
+                
                 
                 FetchedObjects(predicate: buildPredicate()
                                ,sortDescriptors: buildSortDescriptors()) { (dishes: [Dish]) in
@@ -126,7 +140,7 @@ struct Menu: View {
                 // create decoder and use it to decode based off of MenuList created earlier
                 let decoder = JSONDecoder()
                 let menuList = try! decoder.decode(MenuList.self, from: menuListData)
-
+                
                 // convert decoded data to CoreData entities
                 for foodItem in menuList.menu {
                     let newDish = Dish(context: viewContext) // Note - initially had an error saying "Dish could not be found" - quitting and restarting Xcode seemed to solve this as this class is created dynamically
@@ -147,11 +161,11 @@ struct Menu: View {
     }
     
     func buildSortDescriptors() -> [NSSortDescriptor] {
-
+        
         // alphabetical sort descriptor
         return [
             NSSortDescriptor(key: "title",
-                            ascending: true,
+                             ascending: true,
                              selector: #selector(NSString.localizedCaseInsensitiveCompare))
         ]
     }
