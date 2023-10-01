@@ -14,6 +14,8 @@
 		DC49CA642AC1E2CD00698ADD /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49CA632AC1E2CD00698ADD /* Home.swift */; };
 		DC49CA662AC1E44700698ADD /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49CA652AC1E44700698ADD /* Menu.swift */; };
 		DC49CA682AC8F89800698ADD /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49CA672AC8F89800698ADD /* FoodItem.swift */; };
+		DC49CA6A2AC9109400698ADD /* FetchedObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49CA692AC9109400698ADD /* FetchedObjects.swift */; };
+		DC49CA6C2AC9109F00698ADD /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49CA6B2AC9109F00698ADD /* Persistence.swift */; };
 		DC64945F2AC486B400D7FEBA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC64945E2AC486B400D7FEBA /* UserProfile.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,8 @@
 		DC49CA632AC1E2CD00698ADD /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		DC49CA652AC1E44700698ADD /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		DC49CA672AC8F89800698ADD /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
+		DC49CA692AC9109400698ADD /* FetchedObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedObjects.swift; sourceTree = "<group>"; };
+		DC49CA6B2AC9109F00698ADD /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		DC64945E2AC486B400D7FEBA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,6 +69,8 @@
 				DC49CA632AC1E2CD00698ADD /* Home.swift */,
 				DC49CA652AC1E44700698ADD /* Menu.swift */,
 				DC49CA672AC8F89800698ADD /* FoodItem.swift */,
+				DC49CA692AC9109400698ADD /* FetchedObjects.swift */,
+				DC49CA6B2AC9109F00698ADD /* Persistence.swift */,
 				DC4053B32AAEC78100FB0EF0 /* Assets.xcassets */,
 				DC4053B52AAEC78100FB0EF0 /* Preview Content */,
 			);
@@ -150,10 +156,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC49CA622AC0F5E500698ADD /* Onboarding.swift in Sources */,
+				DC49CA6C2AC9109F00698ADD /* Persistence.swift in Sources */,
 				DC49CA642AC1E2CD00698ADD /* Home.swift in Sources */,
 				DC64945F2AC486B400D7FEBA /* UserProfile.swift in Sources */,
 				DC49CA662AC1E44700698ADD /* Menu.swift in Sources */,
 				DC49CA682AC8F89800698ADD /* FoodItem.swift in Sources */,
+				DC49CA6A2AC9109400698ADD /* FetchedObjects.swift in Sources */,
 				DC4053B02AAEC78000FB0EF0 /* LittleLemonApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
