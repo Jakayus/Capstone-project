@@ -75,7 +75,23 @@ struct Menu: View {
             
             
         }
+        .onAppear {
+            getMenuData()
+        }
     }
+    
+    
+    func getMenuData() {
+        
+        let url = URL(string: "https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu.json")!
+        
+        let urlRequest = URLRequest(url: url)
+        let downloadTask = URLSession.shared.dataTask(with: urlRequest) { url, reponse, error in
+            print(url ?? "no url")
+        }
+        downloadTask.resume()
+    }
+    
 }
 
 struct Menu_Previews: PreviewProvider {
