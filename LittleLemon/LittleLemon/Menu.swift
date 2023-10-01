@@ -83,13 +83,34 @@ struct Menu: View {
     
     func getMenuData() {
         
+        // get URL
         let url = URL(string: "https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu.json")!
         
+        // create URL request
         let urlRequest = URLRequest(url: url)
-        let downloadTask = URLSession.shared.dataTask(with: urlRequest) { url, reponse, error in
-            print(url ?? "no url")
+        
+        // create URL Session task
+        let task = URLSession.shared.dataTask(with: urlRequest) { data, reponse, error in
+            
+            if let data = data, let string = String(data: data, encoding: .utf8) {
+                
+                // convert string to Data format
+                let menuListData = Data(string.utf8)
+                
+                // create decoder and use it to decode based off of MenuList created earlier
+                let decoder = JSONDecoder()
+                let menuList = try! decoder.decode(MenuList.self, from: menuListData)
+                
+                // debug prints
+                //print(recipes)
+                //var tempMenuList:MenuList = recipes
+                //print(tempMenuList.menu[0].title)
+                
+            } else {
+                print("unsuccessful decoding - data not valid")
+            }
         }
-        downloadTask.resume()
+        task.resume()
     }
     
 }
