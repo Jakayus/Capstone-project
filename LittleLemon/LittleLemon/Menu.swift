@@ -22,7 +22,7 @@ struct Menu: View {
             
             VStack (alignment: .leading) {
                 VStack (alignment: .leading) {
-                    Text("Litte Lemon").foregroundColor(Color("Primary2"))
+                    Text("Little Lemon").foregroundColor(Color("Primary2"))
                         .font(.largeTitle)
                         .font(.custom("Avenir Book", size: 22))
                         .bold()
@@ -32,12 +32,12 @@ struct Menu: View {
                         .font(.title)
                         .padding([.leading])
                 }
-
+                
                 HStack{
                     Text(AppDescription)
                         .foregroundColor(Color.white)
                         .font(.title3)
-                        .padding([.leading, .trailing])
+                        .padding([.leading])
                     Image("Hero Image")
                         .resizable()
                         .scaledToFit()
@@ -48,13 +48,32 @@ struct Menu: View {
             .background(Color("Primary1"))
             .ignoresSafeArea()
             
-            
-            
-            List {
-                ForEach(TemporarySamples, id: \.self) { foodItem in
-                    Text(foodItem)
+            VStack {
+                HStack {
+                    Text("OUT FOR DELIVERY")
+                        .bold()
+                        .font(.caption)
+                    Image("Delivery Van")
+                        .resizable()
+                        .frame(width: 50, height: 25)
+                }
+                
+                HStack{
+                    Button("Starters"){ }.buttonStyle(.bordered)
+                    Button("Mains") { }.buttonStyle(.bordered)
+                    Button("Desserts") { }.buttonStyle(.bordered)
+                    Button("Sides") { }.buttonStyle(.bordered)
+                }
+                
+                
+                List {
+                    ForEach(TemporarySamples, id: \.self) { foodItem in
+                        FoodItem(foodName: foodItem)
+                    }
                 }
             }
+            
+            
         }
     }
 }
