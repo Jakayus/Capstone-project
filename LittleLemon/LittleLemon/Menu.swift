@@ -67,43 +67,31 @@ struct Menu: View {
                     Button("Sides") { }.buttonStyle(.bordered)
                 }
                 
-            FetchedObjects() { (dishes: [Dish]) in
-                List{
-                    ForEach(dishes, id: \.self) { dish in
-                        HStack{
-                            Text("title: \(dish.title ?? "unknown title")")
-                            Text("price: \(dish.price ?? "unknown price")")
-                            // using Apple example of error handling for AsyncImage
-                            AsyncImage(url: URL(string: dish.image ?? "no image")) { phase in
-                                if let image = phase.image {
-                                    image
-                                        .resizable()
-                                        .scaledToFit()
-                                } else if phase.error != nil {
-                                    Color.red
-                                } else {
-                                    ProgressView()
-                                }
-                            }
+                FetchedObjects(sortDescriptors: buildSortDescriptors()) { (dishes: [Dish]) in
+                    List{
+                        ForEach(dishes, id: \.self) { dish in
+                            HStack{
+                                Text("title: \(dish.title ?? "unknown title")")
+                                Text("price: \(dish.price ?? "unknown price")")
                                 
+                                // using Apple example of error handling for AsyncImage
+                                AsyncImage(url: URL(string: dish.image ?? "no image")) { phase in
+                                    if let image = phase.image {
+                                        image
+                                            .resizable()
+                                            .scaledToFit()
+                                    } else if phase.error != nil {
+                                        Color.red
+                                    } else {
+                                        ProgressView()
+                                    }
+                                } // end AsyncImage
+                            }
                         }
                     }
-                }
-            }
-
-            
-                
-                
-                
-//                List {
-//                    ForEach(TemporarySamples, id: \.self) { foodItem in
-//                        FoodItem(foodName: foodItem)
-//                    }
-//                }
-            }
-            
-            
-        }
+                } // end FetchedObjects
+            } // end VStack (Bottom Half of Menu)
+        } // end VStack (entire Menu)
         .onAppear {
             getMenuData()
         }
@@ -114,7 +102,6 @@ struct Menu: View {
         
         // clear database (per Coursera course instruction)
         PersistenceController.shared.clear()
-        
         
         // get URL
         let url = URL(string: "https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu.json")!
@@ -133,12 +120,8 @@ struct Menu: View {
                 // create decoder and use it to decode based off of MenuList created earlier
                 let decoder = JSONDecoder()
                 let menuList = try! decoder.decode(MenuList.self, from: menuListData)
-                
-                // debug prints
-                //print(recipes)
-                //var tempMenuList:MenuList = recipes
-                //print(tempMenuList.menu[0].title)
-                
+
+                // convert decoded data to CoreData entities
                 for foodItem in menuList.menu {
                     let newDish = Dish(context: viewContext) // Note - initially had an error saying "Dish could not be found" - quitting and restarting Xcode seemed to solve this as this class is created dynamically
                     
@@ -146,7 +129,6 @@ struct Menu: View {
                     newDish.price = foodItem.price
                     newDish.image = foodItem.image
                     print(newDish.title)
-                   
                 }
                 
                 try? viewContext.save() // save to CoreData
@@ -157,6 +139,16 @@ struct Menu: View {
         }
         task.resume()
     }
+    
+    func buildSortDescriptors() -> [NSSortDescriptor] {
+
+        return [
+            NSSortDescriptor(key: "title",
+                            ascending: true,
+                             selector: #selector(NSString.localizedCaseInsensitiveCompare))
+        ]
+    }
+    
     
 }
 
