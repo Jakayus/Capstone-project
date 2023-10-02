@@ -17,6 +17,22 @@ struct Menu: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @State private var searchText = ""
+    @State private var startersPredicate = false
+    @State private var dessertsPredicate = false
+    @State private var mainsPredicate = false
+    @State private var color: Color = Color.gray
+    
+    
+    @State private var predicateSelection = PredicateSelection.None
+    
+    enum PredicateSelection {
+        case None
+        case Starters
+        case Mains
+        case Desserts
+    }
+    
+    
     
     var body: some View {
         VStack{
@@ -77,13 +93,39 @@ struct Menu: View {
                         .frame(width: 50, height: 25)
                 }
                 
-                HStack{
-                    Button("Starters"){ }.buttonStyle(.bordered)
-                    Button("Mains") { }.buttonStyle(.bordered)
-                    Button("Desserts") { }.buttonStyle(.bordered)
-                    Button("Sides") { }.buttonStyle(.bordered)
+                HStack {
+                    Button("Starters"){
+                        predicateSelection = .Starters
+                    }
+                    .foregroundColor(.black)
+                    .buttonStyle(.bordered)
+                    .background(predicateSelection == .Starters ? Color("Secondary1") : Color.white)
+                    .cornerRadius(10)
+                    
+                    Button("Mains"){
+                        predicateSelection = .Mains
+                    }
+                    .foregroundColor(.black)
+                    .buttonStyle(.bordered)
+                    .background(predicateSelection == .Mains ? Color("Secondary1") : Color.white)
+                    .cornerRadius(10)
+                    
+                    .cornerRadius(10)
+                    Button("Desserts") {
+                        predicateSelection = .Desserts
+                    } .foregroundColor(.black)
+                        .buttonStyle(.bordered)
+                        .background(predicateSelection == .Desserts ? Color("Secondary1") : Color.white)
+                        .cornerRadius(10)
+                    
+                    Button("Reset") {
+                        predicateSelection = .None
+                    } .foregroundColor(.black)
+                        .buttonStyle(.bordered)
+                        .cornerRadius(10)
+                    
                 }
-
+                
                 FetchedObjects(predicate: buildPredicate()
                                ,sortDescriptors: buildSortDescriptors()) { (dishes: [Dish]) in
                     List{
@@ -95,17 +137,17 @@ struct Menu: View {
                                         .font(.title3)
                                     Text("\(dish.foodDescription ?? "Description Unknown")")
                                         .foregroundColor(Color.gray)
-                                         Text("$\(dish.price ?? "Unknown Price")")
+                                    Text("$\(dish.price ?? "Unknown Price")")
                                         .bold()
                                 }
-                          
+                                
                                 // using Apple example of error handling for AsyncImage
                                 AsyncImage(url: URL(string: dish.image ?? "no image")) { phase in
                                     if let image = phase.image {
                                         image
                                             .resizable()
                                             .scaledToFit()
-                                           
+                                        
                                     } else if phase.error != nil {
                                         Color.red
                                     } else {
@@ -122,7 +164,6 @@ struct Menu: View {
             getMenuData()
         }
     }
-    
     
     func getMenuData() {
         
@@ -180,12 +221,38 @@ struct Menu: View {
     }
     
     func buildPredicate() -> NSPredicate {
+        
+        // have predicates default to no filtering
+        var searchPredicate = NSPredicate(value: true)
+        var buttonPredicate = NSPredicate(value: true)
+        
         if searchText.isEmpty {
-            return NSPredicate(value: true)
+            // do nothing
         } else {
             // filter on TextField entry
-            return NSPredicate(format: "title CONTAINS[cd] %@",  "\(searchText)")
+            searchPredicate = NSPredicate(format: "title CONTAINS[cd] %@",  "\(searchText)")
         }
+        
+        // additional category predicate
+        let starters = NSPredicate(format: "category MATCHES[cd] %@", "starters")
+        let mains = NSPredicate(format: "category MATCHES[cd] %@", "mains")
+        let desserts = NSPredicate(format: "category MATCHES[cd] %@", "desserts")
+        
+        switch predicateSelection {
+        case .None:
+            buttonPredicate = NSPredicate(value: true)
+        case .Starters:
+            buttonPredicate = starters
+        case .Mains:
+            buttonPredicate = mains
+        case .Desserts:
+            buttonPredicate = desserts
+        }
+        
+        
+        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [searchPredicate, buttonPredicate])
+        
+        return compoundPredicate
     }
     
     
