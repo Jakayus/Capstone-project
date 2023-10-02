@@ -135,11 +135,15 @@ struct Menu: View {
                                         image
                                             .resizable()
                                             .scaledToFit()
+                                            .frame(maxWidth: 150, alignment: .trailing)
                                         
                                     } else if phase.error != nil {
-                                        Color.red
+                                       Image(systemName: "photo")
+                                            .frame(maxWidth: 150, alignment: .trailing)
+                                            .foregroundColor(.red)
                                     } else {
                                         ProgressView()
+                                            .frame(maxWidth: 150, alignment: .trailing)
                                     }
                                 } // end AsyncImage
                             }
