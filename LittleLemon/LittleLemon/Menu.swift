@@ -7,6 +7,21 @@
 
 import SwiftUI
 
+
+struct MenuItemDetails: View {
+    let dishEntity: Dish
+    
+    var body: some View {
+        VStack {
+            Text("Destination Reached")
+            Text("\(dishEntity.foodDescription ?? "Unknown food")")
+        }
+    }
+}
+
+
+
+
 struct Menu: View {
     
     // Sample data until real data is acquired
@@ -26,8 +41,6 @@ struct Menu: View {
         case Mains
         case Desserts
     }
-    
-    
     
     var body: some View {
         VStack{
@@ -116,39 +129,18 @@ struct Menu: View {
                 
                 FetchedObjects(predicate: buildPredicate()
                                ,sortDescriptors: buildSortDescriptors()) { (dishes: [Dish]) in
-                    List{
+                    List {
                         ForEach(dishes, id: \.self) { dish in
-                            HStack{
-                                VStack (alignment: .leading) {
-                                    Text("\(dish.title ?? "Unknown Dish")")
-                                        .bold()
-                                        .font(.title3)
-                                    Text("\(dish.foodDescription ?? "Description Unknown")")
-                                        .foregroundColor(Color.gray)
-                                    Text("$\(dish.price ?? "Unknown Price")")
-                                        .bold()
-                                }
-                                
-                                // using Apple example of error handling for AsyncImage
-                                AsyncImage(url: URL(string: dish.image ?? "no image")) { phase in
-                                    if let image = phase.image {
-                                        image
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(maxWidth: 150, alignment: .trailing)
-                                        
-                                    } else if phase.error != nil {
-                                       Image(systemName: "photo")
-                                            .frame(maxWidth: 150, alignment: .trailing)
-                                            .foregroundColor(.red)
-                                    } else {
-                                        ProgressView()
-                                            .frame(maxWidth: 150, alignment: .trailing)
-                                    }
-                                } // end AsyncImage
+                            
+                            NavigationLink {
+                                MenuItemDetails(dishEntity: dish)
+                            } label: {
+                                SingleMenuItem(dishEntity: dish)
                             }
                         }
                     }
+                    
+                    
                 } // end FetchedObjects
             } // end VStack (Bottom Half of Menu)
         } // end VStack (entire Menu)
@@ -189,8 +181,6 @@ struct Menu: View {
                     newDish.image = foodItem.image
                     newDish.category = foodItem.category
                     newDish.foodDescription = foodItem.description
-                    
-                    // debut - print(newDish.title)
                 }
                 
                 try? viewContext.save() // save to CoreData
@@ -269,3 +259,41 @@ struct Menu_Previews: PreviewProvider {
         Menu()
     }
 }
+
+
+/*
+ 
+ List{
+     ForEach(dishes, id: \.self) { dish in
+         HStack{
+             VStack (alignment: .leading) {
+                 Text("\(dish.title ?? "Unknown Dish")")
+                     .bold()
+                     .font(.title3)
+                 Text("\(dish.foodDescription ?? "Description Unknown")")
+                     .foregroundColor(Color.gray)
+                 Text("$\(dish.price ?? "Unknown Price")")
+                     .bold()
+             }
+             
+             // using Apple example of error handling for AsyncImage
+             AsyncImage(url: URL(string: dish.image ?? "no image")) { phase in
+                 if let image = phase.image {
+                     image
+                         .resizable()
+                         .scaledToFit()
+                         .frame(maxWidth: 150, alignment: .trailing)
+                     
+                 } else if phase.error != nil {
+                    Image(systemName: "photo")
+                         .frame(maxWidth: 150, alignment: .trailing)
+                         .foregroundColor(.red)
+                 } else {
+                     ProgressView()
+                         .frame(maxWidth: 150, alignment: .trailing)
+                 }
+             } // end AsyncImage
+         }
+     }
+ }
+ */

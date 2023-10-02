@@ -13,7 +13,6 @@ struct MenuItem: Decodable {
     let image: String
     let price: String
     
-    // TODO: implement additional properties
     let description: String
     let category: String
 

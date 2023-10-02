@@ -27,5 +27,4 @@ struct FetchedObjects<T, Content>: View where T : NSManagedObject, Content : Vie
     self.content(results.map { $0 })
   }
   
-  
 }

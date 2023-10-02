@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC1872A12ACB1A2000AA5D22 /* SingleMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1872A02ACB1A2000AA5D22 /* SingleMenuItem.swift */; };
 		DC4053B02AAEC78000FB0EF0 /* LittleLemonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4053AF2AAEC78000FB0EF0 /* LittleLemonApp.swift */; };
 		DC4053B42AAEC78100FB0EF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC4053B32AAEC78100FB0EF0 /* Assets.xcassets */; };
 		DC4053B72AAEC78100FB0EF0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC4053B62AAEC78100FB0EF0 /* Preview Assets.xcassets */; };
 		DC49CA622AC0F5E500698ADD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49CA612AC0F5E500698ADD /* Onboarding.swift */; };
 		DC49CA642AC1E2CD00698ADD /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49CA632AC1E2CD00698ADD /* Home.swift */; };
 		DC49CA662AC1E44700698ADD /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49CA652AC1E44700698ADD /* Menu.swift */; };
-		DC49CA682AC8F89800698ADD /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49CA672AC8F89800698ADD /* FoodItem.swift */; };
 		DC49CA6A2AC9109400698ADD /* FetchedObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49CA692AC9109400698ADD /* FetchedObjects.swift */; };
 		DC49CA6C2AC9109F00698ADD /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49CA6B2AC9109F00698ADD /* Persistence.swift */; };
 		DC49CA6E2AC910FF00698ADD /* MenuList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49CA6D2AC910FF00698ADD /* MenuList.swift */; };
@@ -23,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC1872A02ACB1A2000AA5D22 /* SingleMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMenuItem.swift; sourceTree = "<group>"; };
 		DC4053AC2AAEC78000FB0EF0 /* LittleLemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LittleLemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC4053AF2AAEC78000FB0EF0 /* LittleLemonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LittleLemonApp.swift; sourceTree = "<group>"; };
 		DC4053B32AAEC78100FB0EF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -30,7 +31,6 @@
 		DC49CA612AC0F5E500698ADD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		DC49CA632AC1E2CD00698ADD /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		DC49CA652AC1E44700698ADD /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
-		DC49CA672AC8F89800698ADD /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
 		DC49CA692AC9109400698ADD /* FetchedObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedObjects.swift; sourceTree = "<group>"; };
 		DC49CA6B2AC9109F00698ADD /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		DC49CA6D2AC910FF00698ADD /* MenuList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuList.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 				DC64945E2AC486B400D7FEBA /* UserProfile.swift */,
 				DC49CA632AC1E2CD00698ADD /* Home.swift */,
 				DC49CA652AC1E44700698ADD /* Menu.swift */,
-				DC49CA672AC8F89800698ADD /* FoodItem.swift */,
+				DC1872A02ACB1A2000AA5D22 /* SingleMenuItem.swift */,
 				DC49CA692AC9109400698ADD /* FetchedObjects.swift */,
 				DC49CA6B2AC9109F00698ADD /* Persistence.swift */,
 				DC9564732AC93B5E00CC04CC /* ExampleDatabase.xcdatamodeld */,
@@ -165,12 +165,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC9564752AC93B5E00CC04CC /* ExampleDatabase.xcdatamodeld in Sources */,
+				DC1872A12ACB1A2000AA5D22 /* SingleMenuItem.swift in Sources */,
 				DC49CA622AC0F5E500698ADD /* Onboarding.swift in Sources */,
 				DC49CA6C2AC9109F00698ADD /* Persistence.swift in Sources */,
 				DC49CA642AC1E2CD00698ADD /* Home.swift in Sources */,
 				DC64945F2AC486B400D7FEBA /* UserProfile.swift in Sources */,
 				DC49CA662AC1E44700698ADD /* Menu.swift in Sources */,
-				DC49CA682AC8F89800698ADD /* FoodItem.swift in Sources */,
 				DC49CA6A2AC9109400698ADD /* FetchedObjects.swift in Sources */,
 				DC49CA6E2AC910FF00698ADD /* MenuList.swift in Sources */,
 				DC4053B02AAEC78000FB0EF0 /* LittleLemonApp.swift in Sources */,
