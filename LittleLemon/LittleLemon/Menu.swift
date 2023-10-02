@@ -8,26 +8,7 @@
 import SwiftUI
 
 
-struct MenuItemDetails: View {
-    let dishEntity: Dish
-    
-    var body: some View {
-        VStack {
-            Text("Destination Reached")
-            Text("\(dishEntity.foodDescription ?? "Unknown food")")
-        }
-    }
-}
-
-
-
-
 struct Menu: View {
-    
-    // Sample data until real data is acquired
-    private let TemporarySamples = ["Burger", "Fries", "Drink"]
-    
-    let AppDescription = "We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist."
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -44,53 +25,8 @@ struct Menu: View {
     
     var body: some View {
         VStack{
-            HStack {
-                Spacer()
-                Image("Logo")
-                    .resizable()
-                    .fixedSize()
-                Image("Profile")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .padding([.trailing])
-            }
-            
-            VStack (alignment: .leading) {
-                VStack (alignment: .leading) {
-                    Text("Little Lemon").foregroundColor(Color("Primary2"))
-                        .font(.largeTitle)
-                        .font(.custom("Avenir Book", size: 22))
-                        .bold()
-                        .padding([.leading])
-                    Text("Chicago")
-                        .foregroundColor(Color.white)
-                        .font(.title)
-                        .padding([.leading])
-                }
-                
-                HStack{
-                    Text(AppDescription)
-                        .foregroundColor(Color.white)
-                        .font(.title3)
-                        .padding([.leading])
-                    Image("Hero Image")
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(10)
-                        .padding([.bottom, .trailing])
-                }
-                // Search Bar
-                TextField("🔍 Search menu", text: $searchText)
-                    .padding(5)
-                    .foregroundColor(.black)
-                    .overlay { RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.yellow)}
-                    .background(Color.white)
-                    .padding()
-            }
-            .background(Color("Primary1"))
-            .ignoresSafeArea()
-            
+            NavigationBar()
+            HeroSection(textEntry: $searchText)
             VStack {
                 HStack {
                     Text("OUT FOR DELIVERY")
@@ -259,41 +195,3 @@ struct Menu_Previews: PreviewProvider {
         Menu()
     }
 }
-
-
-/*
- 
- List{
-     ForEach(dishes, id: \.self) { dish in
-         HStack{
-             VStack (alignment: .leading) {
-                 Text("\(dish.title ?? "Unknown Dish")")
-                     .bold()
-                     .font(.title3)
-                 Text("\(dish.foodDescription ?? "Description Unknown")")
-                     .foregroundColor(Color.gray)
-                 Text("$\(dish.price ?? "Unknown Price")")
-                     .bold()
-             }
-             
-             // using Apple example of error handling for AsyncImage
-             AsyncImage(url: URL(string: dish.image ?? "no image")) { phase in
-                 if let image = phase.image {
-                     image
-                         .resizable()
-                         .scaledToFit()
-                         .frame(maxWidth: 150, alignment: .trailing)
-                     
-                 } else if phase.error != nil {
-                    Image(systemName: "photo")
-                         .frame(maxWidth: 150, alignment: .trailing)
-                         .foregroundColor(.red)
-                 } else {
-                     ProgressView()
-                         .frame(maxWidth: 150, alignment: .trailing)
-                 }
-             } // end AsyncImage
-         }
-     }
- }
- */

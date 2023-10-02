@@ -13,7 +13,6 @@ struct Home: View {
     
     let persistence = PersistenceController.shared
     
-        
     var body: some View {
         // Default TabView Template for now
         TabView(selection: $tabSelection) {
