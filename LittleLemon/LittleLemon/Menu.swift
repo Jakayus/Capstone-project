@@ -17,13 +17,8 @@ struct Menu: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @State private var searchText = ""
-    @State private var startersPredicate = false
-    @State private var dessertsPredicate = false
-    @State private var mainsPredicate = false
-    @State private var color: Color = Color.gray
-    
-    
     @State private var predicateSelection = PredicateSelection.None
+    @State private var previousPredicate = PredicateSelection.None
     
     enum PredicateSelection {
         case None
@@ -93,9 +88,9 @@ struct Menu: View {
                         .frame(width: 50, height: 25)
                 }
                 
-                HStack {
+                HStack(spacing: 20) {
                     Button("Starters"){
-                        predicateSelection = .Starters
+                        handlePredicate(currentPredicate: .Starters)
                     }
                     .foregroundColor(.black)
                     .buttonStyle(.bordered)
@@ -103,7 +98,7 @@ struct Menu: View {
                     .cornerRadius(10)
                     
                     Button("Mains"){
-                        predicateSelection = .Mains
+                        handlePredicate(currentPredicate: .Mains)
                     }
                     .foregroundColor(.black)
                     .buttonStyle(.bordered)
@@ -112,18 +107,11 @@ struct Menu: View {
                     
                     .cornerRadius(10)
                     Button("Desserts") {
-                        predicateSelection = .Desserts
+                        handlePredicate(currentPredicate: .Desserts)
                     } .foregroundColor(.black)
                         .buttonStyle(.bordered)
                         .background(predicateSelection == .Desserts ? Color("Secondary1") : Color.white)
                         .cornerRadius(10)
-                    
-                    Button("Reset") {
-                        predicateSelection = .None
-                    } .foregroundColor(.black)
-                        .buttonStyle(.bordered)
-                        .cornerRadius(10)
-                    
                 }
                 
                 FetchedObjects(predicate: buildPredicate()
@@ -209,6 +197,20 @@ struct Menu: View {
         }
         task.resume()
     }
+    
+    func handlePredicate(currentPredicate: PredicateSelection) {
+        // save off previous predicate selection
+        previousPredicate = predicateSelection
+        
+        // assign current predicate selection
+        predicateSelection = currentPredicate
+        
+        // Button has been pressed twice, reset
+        if previousPredicate == predicateSelection {
+            predicateSelection = .None
+        }
+    }
+    
     
     func buildSortDescriptors() -> [NSSortDescriptor] {
         
