@@ -35,7 +35,7 @@ struct SingleMenuItem: View {
                         .frame(maxWidth: 150, alignment: .trailing)
                         .foregroundColor(.red)
                 } else {
-                    ProgressView()
+                    ProgressView("Loading...")
                         .frame(maxWidth: 150, alignment: .trailing)
                 }
             } // end AsyncImage

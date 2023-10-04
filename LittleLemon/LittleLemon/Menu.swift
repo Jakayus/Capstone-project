@@ -24,65 +24,69 @@ struct Menu: View {
     }
     
     var body: some View {
-        VStack{
-            NavigationBar()
-            HeroSection(textEntry: $searchText)
-            VStack {
-                HStack {
-                    Text("OUT FOR DELIVERY")
-                        .bold()
-                        .font(.caption)
-                    Image("Delivery Van")
-                        .resizable()
-                        .frame(width: 50, height: 25)
-                }
-                
-                HStack(spacing: 20) {
-                    Button("Starters"){
-                        handlePredicate(currentPredicate: .Starters)
+        NavigationView {
+            VStack{
+                NavigationBar()
+                HeroSection(textEntry: $searchText)
+                VStack {
+                    HStack {
+                        Text("OUT FOR DELIVERY")
+                            .bold()
+                            .font(.caption)
+                        Image("Delivery Van")
+                            .resizable()
+                            .frame(width: 50, height: 25)
                     }
-                    .foregroundColor(.black)
-                    .buttonStyle(.bordered)
-                    .background(predicateSelection == .Starters ? Color("Secondary1") : Color.white)
-                    .cornerRadius(10)
                     
-                    Button("Mains"){
-                        handlePredicate(currentPredicate: .Mains)
-                    }
-                    .foregroundColor(.black)
-                    .buttonStyle(.bordered)
-                    .background(predicateSelection == .Mains ? Color("Secondary1") : Color.white)
-                    .cornerRadius(10)
-                    
-                    .cornerRadius(10)
-                    Button("Desserts") {
-                        handlePredicate(currentPredicate: .Desserts)
-                    } .foregroundColor(.black)
+                    HStack(spacing: 20) {
+                        Button("Starters"){
+                            handlePredicate(currentPredicate: .Starters)
+                        }
+                        .foregroundColor(.black)
                         .buttonStyle(.bordered)
-                        .background(predicateSelection == .Desserts ? Color("Secondary1") : Color.white)
+                        .background(predicateSelection == .Starters ? Color("Secondary1") : Color.white)
                         .cornerRadius(10)
-                }
-                
-                FetchedObjects(predicate: buildPredicate()
-                               ,sortDescriptors: buildSortDescriptors()) { (dishes: [Dish]) in
-                    List {
-                        ForEach(dishes, id: \.self) { dish in
-                            
-                            NavigationLink {
-                                MenuItemDetails(dishEntity: dish)
-                            } label: {
-                                SingleMenuItem(dishEntity: dish)
+                        
+                        Button("Mains"){
+                            handlePredicate(currentPredicate: .Mains)
+                        }
+                        .foregroundColor(.black)
+                        .buttonStyle(.bordered)
+                        .background(predicateSelection == .Mains ? Color("Secondary1") : Color.white)
+                        .cornerRadius(10)
+                        
+                        .cornerRadius(10)
+                        Button("Desserts") {
+                            handlePredicate(currentPredicate: .Desserts)
+                        } .foregroundColor(.black)
+                            .buttonStyle(.bordered)
+                            .background(predicateSelection == .Desserts ? Color("Secondary1") : Color.white)
+                            .cornerRadius(10)
+                    }
+                    
+                    FetchedObjects(predicate: buildPredicate()
+                                   ,sortDescriptors: buildSortDescriptors()) { (dishes: [Dish]) in
+                        List {
+                            ForEach(dishes, id: \.self) { dish in
+                                
+                                NavigationLink {
+                                    MenuItemDetails(dishEntity: dish)
+                                } label: {
+                                    SingleMenuItem(dishEntity: dish)
+                                }
                             }
                         }
-                    }
-                    
-                    
-                } // end FetchedObjects
-            } // end VStack (Bottom Half of Menu)
-        } // end VStack (entire Menu)
-        .onAppear {
-            getMenuData()
-        }
+                        
+                        
+                    } // end FetchedObjects
+                } // end VStack (Bottom Half of Menu)
+            } // end VStack (entire Menu)
+            .onAppear {
+                getMenuData()
+            }
+            
+
+        }.accentColor(Color.white)
     }
     
     func getMenuData() {
