@@ -17,13 +17,16 @@ The Food Menu display included the use of CoreData and understanding how to sort
 
 Figma files can be found in the Design/Figma_Screenshots folder.
 
-Screenshots below:
+See Screenshots below:
 
 ## Onboarding Page
 <img src="https://github.com/Jakayus/Capstone-project/blob/main/Design/GitHub_Screenshots/Onboarding_Screen.png" width="400">
 
 ## Home Screen Light Mode
 <img src="https://github.com/Jakayus/Capstone-project/blob/main/Design/GitHub_Screenshots/Home_Screen_Light_Mode.png" width="400">
+
+## Search Functionality
+<img src="https://github.com/Jakayus/Capstone-project/blob/main/Design/GitHub_Screenshots/LittleLemonSearch.gif" width="400">
 
 ## Item Details Page
 <img src="https://github.com/Jakayus/Capstone-project/blob/main/Design/GitHub_Screenshots/Item_Details_Screen.png" width="400">
