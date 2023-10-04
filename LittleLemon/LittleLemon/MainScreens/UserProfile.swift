@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+// Custom modifier for UserProfile Text Views
+struct UserProfileTextView: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(.vertical)
+            .padding(.horizontal, 20)
+            .overlay(RoundedRectangle(cornerRadius: 5)
+                .stroke(Color("Primary1"), lineWidth: 3)
+            )
+            .padding()
+    }
+}
+
+
 struct UserProfile: View {
     
     private let firstName = UserDefaults.standard.string(forKey: firstNameKey ) ?? "First Name"
@@ -29,12 +43,7 @@ struct UserProfile: View {
                 Text(firstName)
                     .bold()
             }
-            .padding(.vertical)
-            .padding(.horizontal, 20)
-                .overlay(RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color("Primary1"), lineWidth: 3)
-                )
-                .padding()
+            .modifier(UserProfileTextView())
             
             HStack{
                 Text("LAST NAME:")
@@ -42,12 +51,7 @@ struct UserProfile: View {
                 Text(lastName)
                     .bold()
             }
-            .padding(.vertical)
-            .padding(.horizontal, 20)
-                .overlay(RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color("Primary1"), lineWidth: 3)
-                )
-                .padding()
+            .modifier(UserProfileTextView())
             
             HStack{
                 Text("EMAIL:")
@@ -55,12 +59,7 @@ struct UserProfile: View {
                 Text(email)
                     .bold()
             }
-            .padding(.vertical)
-            .padding(.horizontal, 20)
-                .overlay(RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color("Primary1"), lineWidth: 3)
-                )
-                .padding()
+            .modifier(UserProfileTextView())
             
             Button {
                 UserDefaults.standard.set(false, forKey: loggedInKey)
@@ -75,6 +74,7 @@ struct UserProfile: View {
             .foregroundColor(Color.white)
             .cornerRadius(5)
             .padding(.vertical)
+            
             Spacer()
         }
     }

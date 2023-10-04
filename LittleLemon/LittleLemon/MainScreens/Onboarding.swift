@@ -7,12 +7,24 @@
 
 import SwiftUI
 
-// User Default keys
-
+// User Default keys - global variables
 let firstNameKey = "First_Name_Key"
 let lastNameKey = "Last_Name_Key"
 let emailKey = "Email_Key"
 let loggedInKey = "Logged_In_Key"
+
+// Custom modifier for onboarding TextFields
+struct OnboardingTextField: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(Color("Primary2"))
+            .padding()
+            .overlay { RoundedRectangle(cornerRadius: 5)
+                    .stroke(.yellow, lineWidth: 1)
+            }
+            .padding(.horizontal)
+    }
+}
 
 
 struct Onboarding: View {
@@ -22,64 +34,50 @@ struct Onboarding: View {
     @State private var email = ""
     @State private var isLoggedIn = false
     
-    
     var body: some View {
         NavigationView {
             ZStack {
                 Color("Primary1")
                     .ignoresSafeArea()
-               VStack{
+                VStack{
                     Text("Welcome to the Little Lemon App! ")
-                       .foregroundColor(.yellow)
+                        .foregroundColor(.yellow)
                         .font(.title)
                         .padding([.top, .horizontal])
                         .bold()
-                   
+                    
                     Text("Create an account to continue")
-                       .bold()
-                       .foregroundColor(Color("Primary2"))
+                        .bold()
+                        .foregroundColor(Color("Primary2"))
                         .padding()
-                   
+                    
                     // Note - assignment requests iOS15 style coding, latest OS is iOS17
                     NavigationLink(destination: Home(),
                                    isActive: $isLoggedIn) {
                         EmptyView()
                     }
-                   
-                   TextField("",
-                             text: $firstName,
-                             prompt: Text("First Name")
-                    .foregroundColor(.gray)
-                   )
-                   .foregroundColor(Color("Primary2"))
-                    .padding()
-                    .overlay { RoundedRectangle(cornerRadius: 5)
-                            .stroke(.yellow, lineWidth: 1)
-                    }
-                    .padding(.horizontal)
-
+                    
+                    TextField("",
+                              text: $firstName,
+                              prompt: Text("First Name")
+                        .foregroundColor(.gray)
+                    )
+                    .modifier(OnboardingTextField())
+                    
+                    
                     TextField("",
                               text: $lastName,
                               prompt: Text("Last Name")
                         .foregroundColor(.gray)
                     )
-                    .foregroundColor(Color("Primary2"))
-                        .padding()
-                        .overlay { RoundedRectangle(cornerRadius: 5)
-                                .stroke(.yellow, lineWidth: 1)
-                        }.foregroundColor(.red)
-                        .padding(.horizontal)
+                    .modifier(OnboardingTextField())
+                    
                     TextField("",
                               text: $email,
                               prompt: Text("Email").foregroundColor(.gray)
                     )
-                    .foregroundColor(Color("Primary2"))
-                        .padding()
-                        .overlay { RoundedRectangle(cornerRadius: 5)
-                                .stroke(.yellow, lineWidth: 1)
-                        }
-                        .padding(.horizontal)
-    
+                    .modifier(OnboardingTextField())
+                    
                     Button {
                         if ( !firstName.isEmpty &&
                              !lastName.isEmpty &&
@@ -92,19 +90,18 @@ struct Onboarding: View {
                             
                             isLoggedIn = true
                             
-                            // clear entry fields
+                            // clear entry fields for logout
                             firstName = ""
                             lastName = ""
                             email = ""
+                            
                         } else {
-                            // TODO: add alert
+                            // TODO: add alert to signify fields not completed
                         }
                         
                     } label: {
                         Text("Register")
                             .frame(maxWidth: 150)
-                            
-                            
                     }
                     .buttonStyle(.bordered)
                     .background(Color("Primary2"))
@@ -112,18 +109,14 @@ struct Onboarding: View {
                     .cornerRadius(5)
                     .padding(.vertical)
                     
-                    
                 } // end VStack
                 .onAppear {
                     if ( UserDefaults.standard.bool(forKey: loggedInKey) ) {
                         isLoggedIn = true
                     }
+                }
             }
-            }
-            
         } // end Navigation View
-        
-       
     }
 }
 

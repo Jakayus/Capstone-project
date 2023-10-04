@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct Menu: View {
     
     @Environment(\.managedObjectContext) private var viewContext
@@ -76,17 +75,13 @@ struct Menu: View {
                                 }
                             }
                         }
-                        
-                        
                     } // end FetchedObjects
                 } // end VStack (Bottom Half of Menu)
             } // end VStack (entire Menu)
             .onAppear {
                 getMenuData()
             }
-            
-
-        }.accentColor(Color.white)
+        }.accentColor(Color.white) // Navigation Back button
     }
     
     func getMenuData() {

@@ -10,7 +10,6 @@ import SwiftUI
 struct Home: View {
     
     @State private var tabSelection = 1
-    
     let persistence = PersistenceController.shared
     
     var body: some View {
