@@ -8,41 +8,54 @@
 import SwiftUI
 
 struct MenuItemDetails: View {
-    //let dishEntity: Dish
+    let dishEntity: Dish
     
     var body: some View {
-        ZStack {
-            VStack {
-                HStack{
-                    Text("Pasta")
-                        .font(.system(size: 60))
-                        .bold()
-                        .padding([.leading])
-                    Spacer()
-                    Text("$12.99")
-                        .font(.title2)
-                        .bold()
-                        .padding([.trailing])
+        VStack {
+            HStack{
+                Spacer()
+                Text("\(dishEntity.title ?? "Unknown title")")
+                    .font(.system(size: 60))
+                    .bold()
+                //.padding([.leading])
+                Spacer()
+            }
+            // using Apple example of error handling for AsyncImage
+            AsyncImage(url: URL(string: dishEntity.image ?? "no image")) { phase in
+                if let image = phase.image {
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(5)
+                        .padding()
+                    
+                } else if phase.error != nil {
+                    Image(systemName: "photo")
+                        .frame(maxWidth: 150, alignment: .trailing)
+                        .foregroundColor(.red)
+                } else {
+                    ProgressView()
+                        .frame(maxWidth: 150, alignment: .trailing)
                 }
-                Image("Pasta")
-                    .resizable()
-                    .scaledToFit()
-                    .cornerRadius(5)
+            } // end AsyncImage
+            
+            VStack (alignment: .leading){
+                Text("$\(dishEntity.price ?? "Unknown price")")
+                    .font(.title2)
+                    .bold()
                     .padding()
-                Text("Penne with fried aubergines, cherry tomatoes, tomato sauce, fresh chilli, garlic, basil & salted ricotta cheese.")
+                Text("\(dishEntity.foodDescription ?? "Description not provided")")
                     .font(.title3)
                     .italic()
                     .foregroundColor(Color.gray)
                     .padding()
-                    
-                
-            } // end VStack
-        }
+            }
+        } // end VStack
     }
 }
 
-struct MenuItemDetails_Previews: PreviewProvider {
-    static var previews: some View {
-        MenuItemDetails()
-    }
-}
+//struct MenuItemDetails_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MenuItemDetails()
+//    }
+//}

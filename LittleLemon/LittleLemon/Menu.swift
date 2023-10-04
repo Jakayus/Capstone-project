@@ -69,7 +69,7 @@ struct Menu: View {
                         ForEach(dishes, id: \.self) { dish in
                             
                             NavigationLink {
-                                MenuItemDetails()//(dishEntity: dish)
+                                MenuItemDetails(dishEntity: dish)
                             } label: {
                                 SingleMenuItem(dishEntity: dish)
                             }
