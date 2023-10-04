@@ -16,3 +16,20 @@ The User Onboarding included creating proper navigation amongst the differnet sc
 The Food Menu display included the use of CoreData and understanding how to sort and filter data and applying them to the app using good UI/UX practices.
 
 Figma files can be found in the Design/Figma_Screenshots folder.
+
+Screenshots below:
+
+## Onboarding Page
+<img src="https://github.com/Jakayus/Capstone-project/blob/main/Design/GitHub_Screenshots/Onboarding_Screen.png" width="400">
+
+## Home Screen Light Mode
+<img src="https://github.com/Jakayus/Capstone-project/blob/main/Design/GitHub_Screenshots/Home_Screen_Light_Mode.png" width="400">
+
+## Item Details Page
+<img src="https://github.com/Jakayus/Capstone-project/blob/main/Design/GitHub_Screenshots/Item_Details_Screen.png" width="400">
+
+## User Profile Page
+<img src="https://github.com/Jakayus/Capstone-project/blob/main/Design/GitHub_Screenshots/User_Profile_Screen.png" width="400">
+
+## Home Screen Dark mode
+<img src="https://github.com/Jakayus/Capstone-project/blob/main/Design/GitHub_Screenshots/Home_Screen_Dark_Mode.png" width="400">
