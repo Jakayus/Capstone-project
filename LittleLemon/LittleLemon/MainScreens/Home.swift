@@ -23,7 +23,7 @@ struct Home: View {
                 .tabItem { Label("Profile", systemImage: "square.and.pencil") }
                 .tag(2)
         }
-        .accentColor(Color("Primary1"))
+        .accentColor(Color("Primary2"))
         .navigationBarBackButtonHidden(true) // hide back button on home screen
     }
 }

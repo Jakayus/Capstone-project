@@ -34,9 +34,8 @@ struct MenuItemDetails: View {
                             .padding()
                         
                     } else if phase.error != nil {
-                        Image(systemName: "photo")
-                            .frame(maxWidth: 150, alignment: .trailing)
-                            .foregroundColor(.red)
+                        Label("Could not load image", systemImage: "photo")
+                            .foregroundColor(Color("Secondary1"))
                     } else {
                         ProgressView("Loading...")
                             .foregroundColor(Color.white)
